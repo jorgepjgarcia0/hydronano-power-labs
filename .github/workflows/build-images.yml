@@ -1,0 +1,31 @@
+name: Build Image List
+
+on:
+  push:
+    paths:
+      - "images/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Generate images.json
+        run: |
+          echo "[" > images.json
+          for f in images/*; do
+            if [[ "$f" =~ \.(jpg|jpeg|png|gif|webp)$ ]]; then
+              echo "\"$f\"," >> images.json
+            fi
+          done
+          sed -i '$ s/,$//' images.json
+          echo "]" >> images.json
+
+      - name: Commit images.json
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add images.json
+          git commit -m "Auto-update image list" || exit 0
+          git push

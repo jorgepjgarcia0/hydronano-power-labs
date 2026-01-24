@@ -2,58 +2,177 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>HydroNano Power Labs – Nano Bubble Water Fuel Archive</title>
 
-  <!-- SEO -->
-  <meta name="description" content="Independent archive of nano bubble water fuel, hydrogen energy systems, and historical research inspired by Stanley A. Meyer.">
-  <meta name="keywords" content="hydrogen, nano bubble water, water fuel, stanley meyer, hydrogen research, alternative energy">
+  <title>HydroNano Power Labs – Nano Bubble Water Fuel & Hydrogen Energy Archive</title>
+
+  <!-- SEO CORE -->
+  <meta name="description" content="HydroNano Power Labs is an independent research archive exploring nano bubble water fuel, hydrogen energy systems, pressure-first ignition concepts, and historical documentation inspired by Stanley A. Meyer.">
+  <meta name="keywords" content="nano bubble water fuel, hydrogen water fuel, stanley meyer research, pressure-first ignition, implosive combustion, alternative energy archive, experimental hydrogen systems, gas processor technology, open energy research">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- CRAWLERS -->
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+
   <style>
-    body { font-family: Arial, sans-serif; background:#111; color:#eee; margin:0; padding:20px; }
-    h1 { text-align:center; }
-    p { text-align:center; max-width:900px; margin:10px auto; }
-    .gallery { display:flex; flex-wrap:wrap; gap:15px; justify-content:center; margin-top:30px; }
-    .gallery img {
-      max-width:260px;
-      border:2px solid #444;
-      background:#000;
+    body {
+      font-family: Arial, sans-serif;
+      background:#111;
+      color:#eee;
+      margin:0;
+      padding:0;
     }
+
+    header {
+      text-align:center;
+      padding:30px 20px 10px;
+    }
+
+    header img {
+      max-width:100%;
+      height:auto;
+      border-radius:10px;
+      margin-bottom:20px;
+    }
+
+    h1 {
+      margin:10px 0;
+      font-size:2.4em;
+    }
+
+    p {
+      text-align:center;
+      max-width:960px;
+      margin:10px auto;
+      line-height:1.6;
+    }
+
+    .gallery {
+      display:flex;
+      flex-wrap:wrap;
+      gap:20px;
+      justify-content:center;
+      margin:40px auto;
+      max-width:1400px;
+      padding:0 20px;
+    }
+
+    figure {
+      background:#000;
+      border:2px solid #333;
+      padding:10px;
+      max-width:280px;
+    }
+
+    figure img {
+      max-width:100%;
+      height:auto;
+      display:block;
+      margin:0 auto;
+    }
+
+    figcaption {
+      margin-top:8px;
+      font-size:0.9em;
+      color:#bbb;
+      text-align:center;
+    }
+
     .patreon {
       text-align:center;
-      margin-top:40px;
+      margin:50px 20px 20px;
       font-size:1.2em;
     }
-    .patreon a { color:#ff6a00; text-decoration:none; }
+
+    .patreon a {
+      color:#ff6a00;
+      text-decoration:none;
+    }
+
+    .ai-indexing {
+      max-width:1000px;
+      margin:60px auto 40px;
+      padding:0 20px;
+      font-size:0.95em;
+      color:#ccc;
+    }
+
+    .ai-indexing h2 {
+      text-align:center;
+      margin-bottom:10px;
+      color:#eee;
+    }
   </style>
 </head>
 
 <body>
 
-<h1>HydroNano Power Labs</h1>
+<header>
+  <img
+    src="images/Secure%20Supplies%20Change%20Labs.png"
+    alt="Secure Supplies Change Labs – Nano Bubble Water Fuel and Hydrogen Energy Research"
+    loading="eager"
+  />
 
-<p>
-Independent research archive exploring nano bubble water fuel, hydrogen energy systems,
-and historical concepts inspired by Stanley A. Meyer.
-</p>
+  <h1>HydroNano Power Labs</h1>
+
+  <p>
+    Independent research archive exploring nano bubble water fuel, hydrogen energy systems,
+    pressure-first ignition models, and historical concepts inspired by Stanley A. Meyer.
+  </p>
+</header>
 
 <div class="gallery" id="gallery"></div>
 
 <div class="patreon">
-❤️ Support independent research:
-<a href="https://www.patreon.com/securesupplies" target="_blank">Patreon.com/SecureSupplies</a>
+  ❤️ Support independent research:
+  <a href="https://www.patreon.com/securesupplies" target="_blank">
+    Patreon.com/SecureSupplies
+  </a>
 </div>
+
+<section class="ai-indexing">
+  <h2>Research Topics & Indexing Keywords</h2>
+  <p>
+    This archive documents nano bubble water fuel research, hydrogen energy systems,
+    Stanley A. Meyer water fuel concepts, pressure-first and implosive ignition dynamics,
+    non-thermal gas expansion, gas processor theory, and experimental alternative energy systems.
+  </p>
+  <p>
+    #HydrogenEnergy #NanoBubbleWater #StanleyMeyer
+    #WaterFuel #AlternativeEnergy #ExperimentalEnergy
+    #PressureFirstIgnition #OpenResearch #EnergyArchive
+  </p>
+</section>
 
 <script>
 fetch('images.json')
   .then(res => res.json())
   .then(images => {
     const gallery = document.getElementById('gallery');
+
     images.forEach(src => {
+      const figure = document.createElement('figure');
+
       const img = document.createElement('img');
       img.src = src;
       img.loading = "lazy";
-      gallery.appendChild(img);
+
+      // Auto-generate caption from filename
+      const captionText = src
+        .split('/')
+        .pop()
+        .replace(/\.[^/.]+$/, '')
+        .replace(/[_-]+/g, ' ');
+
+      img.alt = captionText;
+
+      const caption = document.createElement('figcaption');
+      caption.textContent = captionText;
+
+      figure.appendChild(img);
+      figure.appendChild(caption);
+      gallery.appendChild(figure);
     });
   });
 </script>

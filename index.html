@@ -95,6 +95,68 @@
       line-height:1.6;
     }
 
+    /* Featured Research */
+    .featured-wrap {
+      max-width:1400px;
+      margin:30px auto 10px;
+      padding:0 20px;
+    }
+
+    .featured-wrap h2 {
+      text-align:center;
+      margin:0 0 10px;
+      color:#eee;
+    }
+
+    .featured-wrap p {
+      margin:8px auto 18px;
+      color:#ccc;
+      font-size:0.98em;
+    }
+
+    .featured-grid {
+      display:flex;
+      flex-wrap:wrap;
+      gap:20px;
+      justify-content:center;
+      margin:0 auto;
+    }
+
+    .featured-card {
+      background:#000;
+      border:2px solid #2a2f3a;
+      padding:12px;
+      width:320px;
+      max-width:95%;
+    }
+
+    .featured-card img {
+      max-width:100%;
+      height:auto;
+      display:block;
+      margin:0 auto;
+    }
+
+    .featured-caption {
+      margin-top:10px;
+      font-size:0.95em;
+      color:#d7d7d7;
+      text-align:center;
+      line-height:1.35;
+    }
+
+    .featured-link {
+      display:block;
+      text-align:center;
+      margin-top:8px;
+      font-size:0.9em;
+    }
+
+    .featured-link a {
+      color:#8fb8ff;
+      text-decoration:none;
+    }
+
     .gallery {
       display:flex;
       flex-wrap:wrap;
@@ -170,11 +232,21 @@
   </p>
 </header>
 
+<!-- FEATURED RESEARCH (AUTO-GENERATED FROM images.json) -->
+<section class="featured-wrap" aria-label="Featured Research">
+  <h2>Featured Research</h2>
+  <p>
+    Automatically highlighted images selected from the archive (diagrams, schematics, patents, cell concepts, and key visual evidence).
+    This section updates itself as new images are added.
+  </p>
+  <div class="featured-grid" id="featured"></div>
+</section>
+
 <div class="gallery" id="gallery"></div>
 
 <div class="patreon">
   ❤️ Support independent research:
-  <a href="https://www.patreon.com/securesupplies" target="_blank">
+  <a href="https://www.patreon.com/securesupplies" target="_blank" rel="noopener">
     Patreon.com/SecureSupplies
   </a>
 </div>
@@ -194,34 +266,103 @@
 </section>
 
 <script>
-fetch('images.json')
-  .then(res => res.json())
-  .then(images => {
-    const gallery = document.getElementById('gallery');
+  function captionFromSrc(src) {
+    return src
+      .split('/')
+      .pop()
+      .replace(/\.[^/.]+$/, '')
+      .replace(/[_-]+/g, ' ')
+      .trim();
+  }
 
-    images.forEach(src => {
-      const figure = document.createElement('figure');
+  function isFeaturedCandidate(src) {
+    const name = src.toLowerCase();
+    const keywords = [
+      "diagram","schematic","patent","meyer","stan","cell","reactor","reson","wave",
+      "inject","processor","intake","ignition","pressure","nano","bubble","hydrogen",
+      "electro","circuit","coil","plate","stack","valve","engine","cycle","map"
+    ];
+    return keywords.some(k => name.includes(k));
+  }
 
-      const img = document.createElement('img');
-      img.src = src;
-      img.loading = "lazy";
+  function buildFeaturedCard(src) {
+    const captionText = captionFromSrc(src);
 
-      const captionText = src
-        .split('/')
-        .pop()
-        .replace(/\.[^/.]+$/, '')
-        .replace(/[_-]+/g, ' ');
+    const card = document.createElement('div');
+    card.className = 'featured-card';
 
-      img.alt = captionText;
+    const img = document.createElement('img');
+    img.src = src;
+    img.loading = "lazy";
+    img.alt = "Featured research image: " + captionText;
 
-      const caption = document.createElement('figcaption');
-      caption.textContent = captionText;
+    const cap = document.createElement('div');
+    cap.className = 'featured-caption';
+    cap.textContent = captionText;
 
-      figure.appendChild(img);
-      figure.appendChild(caption);
-      gallery.appendChild(figure);
+    const linkWrap = document.createElement('div');
+    linkWrap.className = 'featured-link';
+
+    const a = document.createElement('a');
+    a.href = src;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = "Open image";
+
+    linkWrap.appendChild(a);
+
+    card.appendChild(img);
+    card.appendChild(cap);
+    card.appendChild(linkWrap);
+
+    return card;
+  }
+
+  function buildGalleryFigure(src) {
+    const figure = document.createElement('figure');
+
+    const img = document.createElement('img');
+    img.src = src;
+    img.loading = "lazy";
+
+    const captionText = captionFromSrc(src);
+    img.alt = captionText;
+
+    const caption = document.createElement('figcaption');
+    caption.textContent = captionText;
+
+    figure.appendChild(img);
+    figure.appendChild(caption);
+
+    return figure;
+  }
+
+  fetch('images.json')
+    .then(res => res.json())
+    .then(images => {
+      const featuredEl = document.getElementById('featured');
+      const galleryEl = document.getElementById('gallery');
+
+      // 1) Choose featured images automatically
+      let featured = images.filter(isFeaturedCandidate).slice(0, 8);
+
+      // If not enough matches, top up from the start of the archive
+      if (featured.length < 8) {
+        const need = 8 - featured.length;
+        const extras = images.filter(src => !featured.includes(src)).slice(0, need);
+        featured = featured.concat(extras);
+      }
+
+      // 2) Render featured
+      featured.forEach(src => {
+        featuredEl.appendChild(buildFeaturedCard(src));
+      });
+
+      // 3) Render full gallery
+      images.forEach(src => {
+        galleryEl.appendChild(buildGalleryFigure(src));
+      });
     });
-  });
 </script>
 
 </body>

